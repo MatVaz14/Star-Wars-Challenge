@@ -1,0 +1,28 @@
+nav {
+	box-sizing: border-box;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20px 50px;
+	max-width: var(--max-w);
+	margin: 0 auto;
+	margin-bottom: 20px;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+nav img {
+	height: 105px;
+	width: 210px;
+}
+
+@media (max-width: 600px){
+	nav {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	img {
+		height: 125px;
+		width: 65%;
+	}
+}

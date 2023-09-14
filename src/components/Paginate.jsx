@@ -1,5 +1,9 @@
 import { useEffect } from "react";
 import { useStore, useDispatch } from "../store/StoreProvider.js";
+import { TiArrowForward, TiArrowBack } from "react-icons/ti";
+import { PiArrowBendUpLeftBold, PiArrowBendUpRightBold } from "react-icons/pi";
+
+import "./styles/Paginate.css";
 
 const Paginate = () => {
 
@@ -20,21 +24,6 @@ const Paginate = () => {
 	//console.log('currentPage',currentPage);
 	//console.log('indexOne',indexOne);
 	//console.log('indexTwo',indexTwo);
-
-
-	//hacemos que se actualicen los valores al crear un nuevo personaje
-	useEffect(() => {
-		console.log('currentPage',currentPage);
-		console.log('cantButtons',cantButtons);
-		if (currentPage > cantButtons) {
-      		dispatch({ type: "PAGE", payload: cantButtons });
-      		dispatch({
-        		type: "INDEX",
-        		payload: [(cantButtons - 1) * cantPerPage, cantButtons * cantPerPage],
-      		});
-    }
-		console.log('Funciona')
-	},[charactersOrigin, characters, currentPage, cantPerPage, indexOne, indexTwo]);
 
 	const handleClick = (event) => {
 		const selectedPage = Number(event.target.value);
@@ -66,12 +55,12 @@ const Paginate = () => {
 	}
 
 	return (
-		<div>
-			<button onClick={handlePrev}>Prev</button>
+		<div className="container-pagination">
+			<button className={`${buttons.length ? "btn-style" : "no-btn"} ${currentPage === 1 ? "disabled" : null}`} onClick={handlePrev}><TiArrowBack /></button>
 			{
-			buttons.map(btn => <button key={btn} value={btn + 1} onClick={handleClick}>{btn + 1}</button>)
+			buttons.map(btn => <button className={`${currentPage === btn + 1 && "active"} btns`} key={btn} value={btn + 1} onClick={handleClick}>{btn + 1}</button>)
 			}
-			<button onClick={handleNext}>Next</button>
+			<button className={`${buttons.length ? "btn-style" : "no-btn"} ${currentPage === cantButtons && "disabled"}`} onClick={handleNext}><TiArrowForward /></button>
 		</div>
 	)
 }

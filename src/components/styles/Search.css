@@ -1,0 +1,51 @@
+form {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 44px;
+		box-sizing: border-box;
+}
+form input {
+	box-sizing: border-box;
+	width: 250px;
+	height: 100%;
+	color: white;
+	background: black;
+	border-top: 3px solid yellow;
+	border-left: 3px solid yellow;
+	border-bottom: 3px solid yellow;
+	border-radius: 10px 0px 0px 10px;
+	border-right: none;
+	padding-left: 20px;
+	font-size: 19px;
+}
+form button {
+	transition: .5s;
+	box-sizing: border-box;
+	color: yellow;
+	height: 100%;
+	background: black;
+	border-left: none;
+	border-top: 3px solid yellow;
+	border-right: 3px solid yellow;
+	border-bottom: 3px solid yellow;
+	border-radius: 0px 10px 10px 0;
+	padding: 0 20px;
+	cursor: pointer;
+	font-size: 17.5px;
+}
+form input:focus {
+	border: 3px solid yellow;
+}
+form button:hover {
+	transition: .3s;
+	background: rgba(277, 277, 277, 0.3);
+
+}
+
+@media (max-width: 600px){
+	form {
+		margin-top: 25px;
+		width: 80%;
+	}
+}

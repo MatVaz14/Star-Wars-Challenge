@@ -4,6 +4,11 @@ import { getCharacter } from "../api";
 
 import { FaSearchPlus } from "react-icons/fa";
 import swal from "sweetalert";
+import "./styles/Search.css";
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+AOS.init();
 
 const Search = () => {
 
@@ -62,7 +67,7 @@ const handleSubmit = async (event) => {
 };
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<form onSubmit={handleSubmit} data-aos="fade-left" data-aos-duration="1500">
 			<input placeholder="Search character..." disabled={isLoading ? true : false} value={isLoading ? 'Searching...' : name} type="text" onChange={handleName}/>
 			<button disabled={name.length === 0 || isLoading ? true : false} type="submit">{isLoading ? <span>. . .</span> : <FaSearchPlus/>}</button>
 		</form>
