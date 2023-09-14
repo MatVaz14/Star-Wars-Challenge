@@ -37,16 +37,18 @@ const handleSubmit = async (event) => {
   if (exist) {
     // Buscamos la posición en la que se encuentra el personaje que necesitamos
     let index = charactersOrigin.findIndex((character) =>
-      character.name.toLowerCase().includes(name.toLowerCase())
+       character.name.toLowerCase().includes(name.toLowerCase())
     );
+    const pageIndex = Math.ceil((index + 1) / cantPerPage); // Calcula la página
     dispatch({ type: "LOADING" });
     setName("");
     swal(
       "Already Exist!",
-      `The character has already been searched`,
+      `The character has already been searched, page ${pageIndex}`,
       "warning"
     );
-    //dispatch({ type: "PAGE", payload: Number(index) });
+    dispatch({ type: "PAGE", payload: pageIndex });
+    dispatch({ type: "INDEX", payload: [Number((pageIndex - 1) * cantPerPage),Number(pageIndex * cantPerPage)] });
     return;
   }
 

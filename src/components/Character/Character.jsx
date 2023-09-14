@@ -9,7 +9,7 @@ const Character = ({name,gender,homeworld,species,films,starships}) => {
 			<div className="detail-character">
 				<div>
 					<h1 className="name">{name}</h1>
-					<h2>Gender - ' <span>{gender?.charAt(0).toUpperCase() + gender?.slice(1)}</span> '</h2>
+					<span className="gender-text">' {gender?.charAt(0).toUpperCase() + gender?.slice(1)} '</span>
 				</div>
 
 				<div className="extra-detail">

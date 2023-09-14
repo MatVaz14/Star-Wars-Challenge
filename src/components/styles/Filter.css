@@ -24,7 +24,7 @@
 	transition: .3s;
 	background: rgba(277, 277, 277, 0.3);
 }
-.container_filter select, .no-show {
+.container_filter select{
 	border: 2px solid yellow;
 	border-radius: 5px;
 	font-size: 16px;

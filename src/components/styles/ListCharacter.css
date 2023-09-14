@@ -5,3 +5,31 @@
 	display: flex;
 	flex-direction: column;
 }
+.characters_welcome {
+	color: white;
+	width: 60%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+}
+.characters_welcome h1 {
+	font-family: 'Arial';
+		font-size: 42px;
+	color: black;
+	-webkit-text-stroke: 1px yellow;
+}
+.characters_welcome p {
+	margin: 10px auto;
+	font-size: 22px;
+	font-weight: bold;
+}
+.characters_welcome em {
+	font-weight: bold;
+	margin-top: 30px;
+	font-size: 20px;
+}
+.no-welcome {
+	display: none;
+}
