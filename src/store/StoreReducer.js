@@ -19,10 +19,10 @@ const InitialState = {
   //pagina actual
   currentPage: 1,
   //cantidad de personajes por pagina
-  cantPerPage: 5,
+  cantPerPage: 5, //Modificar estos valores por si se quieren mostrar diferentes valores en la pagina
   //indices del arreglo
   indexOne: 0,
-  indexTwo: 5,
+  indexTwo: 5, //Modificar estos valores por si se quieren mostrar diferentes valores en la pagina
   //para mostrar en pantalla si esta cargando
   isLoading: false,
   isDetailLoaded: false,

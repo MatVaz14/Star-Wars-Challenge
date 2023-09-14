@@ -1,8 +1,5 @@
 # STAR WARS SWAPI
 
-<em>The Deploy was carried out with the Vercel service</em>
-You can see the project: **[Star Wars Information](https://star-wars-challenge-nine.vercel.app)**
-
 <p>
 If the repository is cloned, the <code>npm start</code> command must be executed, since it must install dependencies and so on.
 
