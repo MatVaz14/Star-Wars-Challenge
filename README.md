@@ -25,6 +25,7 @@ When you search for a character it can be displayed on the screen, as characters
 It should be noted that 5 characters will be shown per page, so it has pagination
 </em>
 </p>
+
 ![Screenshot](src/assets/screenshot/character.png)
 
 ## Available Scripts
