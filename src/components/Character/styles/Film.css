@@ -6,7 +6,7 @@
 	width: 100%;
 	margin: auto;
 	border-radius: 10px;
-	padding: 20px 40px;
+	padding: 20px;
 	box-sizing: border-box;
 }
 .container-film hr {
@@ -25,6 +25,7 @@
 }
 .container-film .film-header .btns-film {
 	margin-left: 30px;
+	width: max-content;
 }
 .container-film .film-header .btns-film button {
 	cursor: pointer;

@@ -33,3 +33,19 @@
 .no-welcome {
 	display: none;
 }
+.loading-animation {
+	transition: .5s;
+	margin-top: 30px;
+	animation: loading infinite 2s;
+}
+@keyframes loading{
+	0% {
+		transform: rotate(0deg);
+	}
+	50% {
+		transform: rotate(45deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
