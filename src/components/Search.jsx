@@ -59,7 +59,9 @@ const handleSubmit = async (event) => {
     info.forEach((i) => dispatch({ type: "SEARCH", payload: i }));
 
     //Redireccionamos directamente a la opción que busco
-    //dispatch({ type: "PAGE", payload: (Math.ceil(charactersOrigin.length / cantPerPage)) });
+    let index = Math.ceil(charactersOrigin.length / cantPerPage);
+    dispatch({ type: "PAGE", payload: index });
+    dispatch({ type: "INDEX", payload: [Number((index - 1) * cantPerPage),Number(index * cantPerPage)] });
   } else {
     swal("Not Found!", "Character not found", "error");
   }
