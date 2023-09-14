@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useStore, useDispatch } from "../store/StoreProvider.js";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
+
+import "./styles/Filter.css";
+
 const Filter = () => {
 
 	const store = useStore();
@@ -65,7 +68,7 @@ const Filter = () => {
     }
 
 	return (
-		<div>
+		<div className="container_filter">
 			<div>
 				<button onClick={handleReset}>Reset Filter</button>
 			<select defaultValue={'allGender'} onChange={handleChange} name="gender">

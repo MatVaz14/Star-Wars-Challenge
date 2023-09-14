@@ -1,0 +1,57 @@
+.container-starship {
+	transition: .5s;
+	background-color: rgba(130, 130, 130, 0.1);
+	border-radius: 10px;
+	padding: 20px;
+	min-width: 350px;
+	max-width: max-content;
+	margin: 20px;
+	box-sizing: border-box;
+}
+ .container-starship:hover {
+	transition: .3s;
+	transform: scale(1.05);
+	background-color: rgba(130, 130, 130, 0.2);
+}
+.container-starship .bg-starship {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 20px;
+}
+.container-starship .bg-starship .btns-starships {
+	margin-left: 15px;
+}
+.container-starship .bg-starship .btns-starships button {
+	cursor: pointer;
+	transition: .5s;
+	width: 40px;
+	height: 40px;
+	background-color: rgba(0, 0, 0, 0.8);
+	border: 2px solid yellow;
+	color: yellow;
+	border-radius: 5px;
+	font-size: 20px;
+	box-sizing: border-box;
+	margin: 0 5px;
+}
+.container-starship .bg-starship .btns-starships button:hover {
+	transition: .3s;
+	transform: scale(1.05);
+}
+.container-starship .bg-starship .btns-starships .disabled {
+	transition: .5s;
+	cursor: no-drop;
+	opacity: 50%;
+}
+
+@media (max-width: 600px){
+	.container-starship {
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	margin: 10px auto;
+	width: 100%;
+	box-sizing: border-box;
+	}
+}

@@ -14,3 +14,14 @@ body {
 html {
   overflow-x: hidden;
 }
+
+h2 {
+  font-family: "Arial";
+  font-size: 26px;
+  color: black;
+  -webkit-text-stroke: 1px yellow;
+}
+h3 span {
+  font-size: 18px;
+  font-weight: lighter;
+}

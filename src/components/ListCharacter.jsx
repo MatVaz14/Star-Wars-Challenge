@@ -8,7 +8,7 @@ const ListCharacter = () => {
 	const { characters, indexOne, indexTwo } = store;
 	//console.log(characters.slice(indexOne, indexTwo))
 	return (
-		<div>
+		<div className="container-listCharacter">
 			{characters.length ? (
 				characters?.map(character => <Character 
 					key={character?.name}

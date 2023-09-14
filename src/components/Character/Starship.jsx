@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useStore, useDispatch } from "../../store/StoreProvider.js";
 import { TiArrowForward, TiArrowBack } from "react-icons/ti";
 
+import "./styles/Starship.css";
+
 const Starship = ({starships}) => {
 
 	const store = useStore();
@@ -22,19 +24,19 @@ const Starship = ({starships}) => {
 
 
 	return (
-		<div>
-			<div>
-				<h1>STARSHIP</h1>
-				<div>
-					<button onClick={handlePrev}><TiArrowBack /></button>
-					<button onClick={handleNext}><TiArrowForward /></button>
+		<div className="container-starship">
+			<div className="bg-starship">
+				<h2>STARSHIP</h2>
+				<div className="btns-starships">
+					<button className={`${currentShip === 0 && "disabled"}`} onClick={handlePrev}><TiArrowBack /></button>
+					<button className={`${currentShip === starships.length - 1 && "disabled"}`} onClick={handleNext}><TiArrowForward /></button>
 				</div>
 			</div>
 			<div>
-				<h2>Name - ' <span>{starships[currentShip]?.name}</span> '</h2>
-				<h2>Model - ' <span>{starships[currentShip]?.model}</span> '</h2>
-				<h2>Manufacturer - ' <span>{starships[currentShip]?.manufacturer}</span> '</h2>
-				<h2>Starship Class - ' <span>{starships[currentShip]?.starship_class}</span> '</h2>
+				<h3>Name - ' <span>{starships[currentShip]?.name}</span> '</h3>
+				<h3>Model - ' <span>{starships[currentShip]?.model}</span> '</h3>
+				<h3>Manufacturer - ' <span>{starships[currentShip]?.manufacturer}</span> '</h3>
+				<h3>Starship Class - ' <span>{starships[currentShip]?.starship_class}</span> '</h3>
 			</div>
 		</div>
 	)

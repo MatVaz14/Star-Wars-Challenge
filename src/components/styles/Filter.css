@@ -1,0 +1,38 @@
+.container_filter {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	max-width: var(--max-w);
+	margin: 0 auto;
+	align-items: center;
+	padding-left: 20px;
+}
+.container_filter button {
+	transition: .5s;
+	box-sizing: border-box;
+	cursor: pointer;
+	border: 2px solid yellow;
+	background: black;
+	width: max-content;
+	border-radius: 5px;
+	color: yellow;
+	margin: 10px 5px;
+	font-size: 18px;
+	padding: 10px 15px;
+}
+.container_filter button:hover {
+	transition: .3s;
+	background: rgba(277, 277, 277, 0.3);
+}
+.container_filter select {
+	border: 2px solid yellow;
+	border-radius: 5px;
+	font-size: 16px;
+	background: black;
+	color: yellow;
+	width: max-content;
+	box-sizing: border-box;
+	padding: 5px 10px;
+	cursor: pointer;
+	margin: 10px 5px;
+}
