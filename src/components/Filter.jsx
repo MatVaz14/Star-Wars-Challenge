@@ -72,7 +72,7 @@ const Filter = () => {
     }
 
 	return (
-		<div className="container_filter" data-aos="fade-down" data-aos-duration="2000">
+		<div className={`${charactersOrigin.length !== 0 ? "container_filter": "disabled"}`} data-aos="fade-down" data-aos-duration="2000">
 			<div>
 				<button onClick={handleReset}>Reset Filter</button>
 			<select defaultValue={'allGender'} onChange={handleChange} name="gender">

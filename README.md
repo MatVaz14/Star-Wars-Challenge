@@ -1,6 +1,31 @@
-# Getting Started with Create React App
+# STAR WARS SWAPI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<em>The Deploy was carried out with the Vercel service</em>
+You can see the project: **[Star Wars Information](https://star-wars-challenge-nine.vercel.app)**
+
+<p>
+If the repository is cloned, the <code>npm start</code> command must be executed, since it must install dependencies and so on.
+
+React, Javascript, CSS, AOS, Axios, SweetAlert were used for this project
+</p>
+
+<p>
+<em>
+It is an application which allows you to search for characters from the Star Wars Universe, and be able to see the details of each of the characters.
+</em>
+1. At first there will be no character, since it will be waiting for the user to enter the name of a character or even a single letter will be enough to search for a variety of characters that include that letter.
+</p>
+
+![Screenshot](src/assets/screenshot/search.png)
+![Screenshot](src/assets/screenshot/home.png)
+
+<p>
+When you search for a character it can be displayed on the screen, as characters are added there will be more options in the filters.
+<em>
+It should be noted that 5 characters will be shown per page, so it has pagination
+</em>
+</p>
+![Screenshot](src/assets/screenshot/character.png)
 
 ## Available Scripts
 
