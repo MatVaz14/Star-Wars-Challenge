@@ -3,9 +3,11 @@
 	background-color: rgba(130, 130, 130, 0.1);
 	border-radius: 10px;
 	padding: 20px;
-	min-width: 350px;
+	min-width: 330px;
 	max-width: max-content;
-	margin: 20px;
+	min-height: 180px;
+	max-height: max-content;
+	margin: 10px;
 	box-sizing: border-box;
 }
 .container-specie:hover {
@@ -21,7 +23,8 @@
 	flex-direction: column;
 	padding: 20px;
 	margin: 10px auto;
-	width: 100%;
+	width: 100%!important;
+	max-width: 100%!important;
 	box-sizing: border-box;
 	}
 }

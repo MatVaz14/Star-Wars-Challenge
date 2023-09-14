@@ -5,6 +5,10 @@ import { AiOutlineClose } from "react-icons/ai";
 
 import "./styles/Filter.css";
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+AOS.init();
+
 const Filter = () => {
 
 	const store = useStore();
@@ -68,7 +72,7 @@ const Filter = () => {
     }
 
 	return (
-		<div className="container_filter">
+		<div className="container_filter" data-aos="fade-down" data-aos-duration="2000">
 			<div>
 				<button onClick={handleReset}>Reset Filter</button>
 			<select defaultValue={'allGender'} onChange={handleChange} name="gender">

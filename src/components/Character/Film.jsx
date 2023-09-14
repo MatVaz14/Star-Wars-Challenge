@@ -57,7 +57,7 @@ const Film = ({film}) => {
 				</div>
 				</div>
 			</div>
-			<img loading="lazy" src={getImage()} alt="portada" width="200px" height="300px"/>
+			<img className="img-detail" loading="lazy" src={getImage()} alt="portada" width="260px" height="300px"/>
 			
 		</div>
 	)

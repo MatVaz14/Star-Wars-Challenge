@@ -5,7 +5,9 @@
 	padding: 20px;
 	min-width: 350px;
 	max-width: max-content;
-	margin: 20px;
+	min-height: 180px;
+	max-height: max-content;
+	margin: 10px;
 	box-sizing: border-box;
 }
  .container-starship:hover {

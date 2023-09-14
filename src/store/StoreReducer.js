@@ -65,13 +65,7 @@ const StoreReducer = (state = InitialState, action) => {
     };
 
   case FILTER_GENDER:
-    //let gender = [];
     let gender = [...state.charactersOrigin];
-    //if(state.lastFilterCharacter.length >= 1){
-    //  gender = [...state.lastFilterCharacter]
-    //}else{
-    //  gender = [...state.charactersOrigin]
-    //}
     let filterGender = [];
     if(action.payload === 'allGender'){
       filterGender = gender;
