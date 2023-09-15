@@ -6,75 +6,112 @@ import { FaSearchPlus } from "react-icons/fa";
 import swal from "sweetalert";
 import "./styles/Search.css";
 
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
 AOS.init();
 
 const Search = () => {
-
-	const store = useStore();
-	const dispatch = useDispatch();
+  const store = useStore();
+  const dispatch = useDispatch();
 
   //guardamos valor del input
-	const [name, setName] = useState("");
-	const handleName = (event) => {
-		setName(event.target.value)
-	}
+  const [name, setName] = useState("");
+  const handleName = (event) => {
+    setName(event.target.value);
+  };
 
-	const { charactersOrigin, isLoading, cantPerPage } = store;
+  const { charactersOrigin, isLoading, cantPerPage, currentPage } = store;
 
-//funcion para el formulario
-const handleSubmit = async (event) => {
-  event.preventDefault();
-  dispatch({ type: "LOADING" });
+  //funcion para el formulario
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    dispatch({ type: "LOADING" });
 
-  // Buscamos que el personaje que queremos no esté en nuestro estado global, si existe, finaliza la ejecución
-  let exist = charactersOrigin.find(
-    (character) =>
+    // Buscamos que el personaje que queremos no esté en nuestro estado global, si existe, finaliza la ejecución
+    let exist = charactersOrigin.find((character) =>
       character?.name?.toLowerCase().includes(name.toLowerCase())
-  );
-
-  if (exist) {
-    // Buscamos la posición en la que se encuentra el personaje que necesitamos
-    let index = charactersOrigin.findIndex((character) =>
-       character.name.toLowerCase().includes(name.toLowerCase())
     );
-    const pageIndex = Math.ceil((index + 1) / cantPerPage); // Calcula la página
+
+    if (exist) {
+      // Buscamos la posición en la que se encuentra el personaje que necesitamos
+      let index = charactersOrigin.findIndex((character) =>
+        character.name.toLowerCase().includes(name.toLowerCase())
+      );
+      const pageIndex = Math.ceil((index + 1) / cantPerPage); // Calcula la página
+      dispatch({ type: "LOADING" });
+      setName("");
+      swal(
+        "Already Exist!",
+        `The character has already been searched, page ${pageIndex}`,
+        "warning"
+      );
+      dispatch({ type: "PAGE", payload: pageIndex });
+      dispatch({
+        type: "INDEX",
+        payload: [
+          Number((pageIndex - 1) * cantPerPage),
+          Number(pageIndex * cantPerPage),
+        ],
+      });
+      return;
+    }
+
+    let info = await getCharacter(name);
+
+    // Verificamos si info contiene datos válidos antes de realizar el dispatch y demás
+    if (info && info.length > 0) {
+      info.forEach((i) => dispatch({ type: "SEARCH", payload: i }));
+
+      //Redireccionamos directamente a la opción que busco
+      let index = Math.ceil(charactersOrigin.length / cantPerPage);
+      if (index === 0) {
+        dispatch({ type: "PAGE", payload: 1 });
+      }
+      if (index === currentPage) {
+        dispatch({ type: "PAGE", payload: Number(index) });
+        dispatch({
+          type: "INDEX",
+          payload: [
+            Number((index - 1) * cantPerPage),
+            Number(index * cantPerPage),
+          ],
+        });
+      } else {
+        index = index + 1;
+        dispatch({ type: "PAGE", payload: Number(index) });
+        dispatch({
+          type: "INDEX",
+          payload: [
+            Number((index - 1) * cantPerPage),
+            Number(index * cantPerPage),
+          ],
+        });
+      }
+    } else {
+      swal("Not Found!", "Character not found", "error");
+    }
+
     dispatch({ type: "LOADING" });
     setName("");
-    swal(
-      "Already Exist!",
-      `The character has already been searched, page ${pageIndex}`,
-      "warning"
-    );
-    dispatch({ type: "PAGE", payload: pageIndex });
-    dispatch({ type: "INDEX", payload: [Number((pageIndex - 1) * cantPerPage),Number(pageIndex * cantPerPage)] });
-    return;
-  }
+  };
 
-  let info = await getCharacter(name);
-
-  // Verificamos si info contiene datos válidos antes de realizar el dispatch y demás
-  if (info && info.length > 0) {
-    info.forEach((i) => dispatch({ type: "SEARCH", payload: i }));
-
-    //Redireccionamos directamente a la opción que busco
-     // dispatch({ type: "PAGE", payload: Number(index) });
-     // dispatch({ type: "INDEX", payload: [Number((index - 1) * cantPerPage),Number(index * cantPerPage)] });
-  } else {
-    swal("Not Found!", "Character not found", "error");
-  }
-
-  dispatch({ type: "LOADING" });
-  setName("");
+  return (
+    <form onSubmit={handleSubmit} data-aos="fade-left" data-aos-duration="1500">
+      <input
+        placeholder="Search character..."
+        disabled={isLoading ? true : false}
+        value={isLoading ? "Searching..." : name}
+        type="text"
+        onChange={handleName}
+      />
+      <button
+        disabled={name.length === 0 || isLoading ? true : false}
+        type="submit"
+      >
+        {isLoading ? <span>. . .</span> : <FaSearchPlus />}
+      </button>
+    </form>
+  );
 };
-
-	return (
-		<form onSubmit={handleSubmit} data-aos="fade-left" data-aos-duration="1500">
-			<input placeholder="Search character..." disabled={isLoading ? true : false} value={isLoading ? 'Searching...' : name} type="text" onChange={handleName}/>
-			<button disabled={name.length === 0 || isLoading ? true : false} type="submit">{isLoading ? <span>. . .</span> : <FaSearchPlus/>}</button>
-		</form>
-	)
-}
 
 export default Search;

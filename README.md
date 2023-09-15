@@ -1,10 +1,6 @@
 # STAR WARS SWAPI
 
-<p>
-If the repository is cloned, the <code>npm start</code> command must be executed, since it must install dependencies and so on.
-
-React, Javascript, CSS, AOS, Axios, SweetAlert were used for this project
-</p>
+Deploy: **[Star Wars Swapi Challenge](https://star-wars-swapi-challenge.vercel.app)**
 
 <p>
 <em>
@@ -24,6 +20,15 @@ It should be noted that 5 characters will be shown per page, so it has paginatio
 </p>
 
 ![Screenshot](src/assets/screenshot/character.png)
+
+
+## More Information
+<p>
+If the repository is cloned, the <code>npm start</code> command must be executed, since it must install dependencies and so on.
+
+React, Javascript, CSS, AOS, Axios, SweetAlert were used for this project
+</p>
+
 
 ## Available Scripts
 
