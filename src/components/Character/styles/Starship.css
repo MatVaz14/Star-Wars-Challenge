@@ -46,7 +46,7 @@
 	opacity: 50%;
 }
 
-@media (max-width: 600px){
+@media (max-width: 640px){
 	.container-starship {
 	display: flex;
 	flex-direction: column;

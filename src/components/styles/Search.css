@@ -43,7 +43,7 @@ form button:hover {
 
 }
 
-@media (max-width: 600px){
+@media (max-width: 640px){
 	form {
 		margin-top: 25px;
 		width: 80%;

@@ -15,7 +15,7 @@ nav img {
 	width: 210px;
 }
 
-@media (max-width: 600px){
+@media (max-width: 640px){
 	nav {
 		flex-direction: column;
 		justify-content: center;

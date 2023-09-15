@@ -55,7 +55,7 @@
 	font-size: 36px;
 }
 
-@media (max-width: 600px){
+@media (max-width: 640px){
 	.container-btn-menu {
 		transition: .5s;
 		display: flex;
