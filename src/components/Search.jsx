@@ -21,7 +21,7 @@ const Search = () => {
 		setName(event.target.value)
 	}
 
-	const { charactersOrigin, characters, isLoading,currentPage, cantPerPage } = store;
+	const { charactersOrigin, isLoading, cantPerPage } = store;
 
 //funcion para el formulario
 const handleSubmit = async (event) => {
