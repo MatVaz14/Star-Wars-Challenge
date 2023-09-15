@@ -1,4 +1,5 @@
 import { Navbar, Paginate, Filter, ListCharacter } from "../components";
+import "./Home.css";
 
 const Home = () => {
 	return (

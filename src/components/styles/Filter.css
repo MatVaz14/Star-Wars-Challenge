@@ -40,3 +40,66 @@
 	transition: .5s;
 	display: none;
 }
+.container-btn-menu {
+	display: none;
+}
+
+/*BOTON PARA RESPONSIVE MENU*/
+.btn-menu {
+	transition: .5s;
+	position: absolute;
+	z-index: 101;
+	color: white;
+	top: 25px;
+	right: 25px;
+	font-size: 36px;
+}
+
+@media (max-width: 600px){
+	.container-btn-menu {
+		transition: .5s;
+		display: flex;
+		box-sizing: border-box;
+	}
+	.xm-device {
+	display: none;
+	}
+	.btn-menu-exit {
+		transition: .5s;
+		position: fixed!important;
+		box-sizing: border-box;
+	}
+	.sm-device {
+		position: fixed;
+		background: rgba(0, 0, 0, 0.8);
+		border-bottom: 5px solid yellow;
+		overflow-y: hidden;
+		z-index: 100;
+		top: 0;
+		width: 100%;
+		padding-top: 13vh;
+		padding-bottom: 20px;
+		height: max-content;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: start;
+		box-sizing: border-box;
+	}
+	.container_btn_filter {
+		margin: 0 auto;
+		width: max-content;
+		display: flex;
+		flex-direction: column;
+		box-sizing: border-box;
+	}
+	.container_btn_filter button {
+		box-sizing: border-box;
+		width: 100%;
+	}
+	.container_btn_filter select {
+		width: 100%;
+		box-sizing: border-box;
+		height: 50px;
+	}
+}

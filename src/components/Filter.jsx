@@ -11,6 +11,10 @@ AOS.init();
 
 const Filter = () => {
 
+	//===============MENU RESPONSIVE===============\\
+	const [menu, setMenu] = useState(0);
+	//===============MENU RESPONSIVE===============\\
+
 	const store = useStore();
 	const dispatch = useDispatch();
 
@@ -72,9 +76,18 @@ const Filter = () => {
     }
 
 	return (
-		<div className={`${charactersOrigin.length === 0 ? "no-show": "container_filter"}`} data-aos="fade-down" data-aos-duration="500">
-			<div>
-				<button onClick={handleReset}>Reset Filter</button>
+		<div>
+
+			{
+				charactersOrigin.length !== 0 ? (<div className="container-btn-menu">
+				{menu === 0 ? <GiHamburgerMenu onClick={() => setMenu(1)} className="btn-menu"/> : <AiOutlineClose onClick={() => setMenu(0)} className="btn-menu btn-menu-exit"/>}
+			</div>) : null
+			}
+
+			<div className={`${charactersOrigin.length === 0 ? "no-show": "container_filter"} ${menu === 0 ? "xm-device" : 'sm-device'}`}>
+			
+			<div className={`${menu === 1 ? "container_btn_filter" : null}`}>
+				<button onClick={handleReset}>Reset Filters</button>
 			<select defaultValue={'allGender'} onChange={handleChange} name="gender">
 				<option value="allGender" selected={reset === 0 ? true : false}>All Genders</option>
 				{getGender?.map(gender => <option key={gender} value={gender}>{gender?.charAt(0).toUpperCase() + gender?.slice(1)}</option>)}
@@ -92,6 +105,8 @@ const Filter = () => {
 				{getFilm?.map(film => <option key={film} value={film}>{film}</option>)}
 			</select>
 			</div>
+
+		</div>
 		</div>
 	)
 }
