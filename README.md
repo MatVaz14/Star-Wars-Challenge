@@ -5,7 +5,7 @@ Deploy: **[Star Wars Swapi Challenge](https://star-wars-swapi-challenge.vercel.a
 <p>
 <em>
 It is an application which allows you to search for characters from the Star Wars Universe, and be able to see the details of each of the characters.
-</em>
+</em><br />
 1. At first there will be no character, since it will be waiting for the user to enter the name of a character or even a single letter will be enough to search for a variety of characters that include that letter.
 </p>
 
