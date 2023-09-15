@@ -17,7 +17,7 @@ const Filter = () => {
   const store = useStore();
   const dispatch = useDispatch();
 
-  const { charactersOrigin, currentPage, cantPerPage } = store;
+  const { charactersOrigin, cantPerPage } = store;
 
   const [reset, setReset] = useState(1);
 

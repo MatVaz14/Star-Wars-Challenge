@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useStore } from "../../store/StoreProvider.js";
 import { imageFilms } from "../../assets";
 import portada from "../../assets/PortadaStarWars.jpg";
 import { TiArrowForward, TiArrowBack } from "react-icons/ti";
@@ -7,11 +6,7 @@ import { TiArrowForward, TiArrowBack } from "react-icons/ti";
 import "./styles/Film.css";
 
 const Film = ({ film }) => {
-  const store = useStore();
-
   const [currentFilm, setCurrentFilm] = useState(0);
-
-  const { characters, current } = store;
 
   const handleNext = () => {
     if (currentFilm === film.length - 1) return;

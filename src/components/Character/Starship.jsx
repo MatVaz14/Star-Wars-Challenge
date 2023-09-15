@@ -1,16 +1,10 @@
-import { useState, useEffect } from "react";
-import { useStore, useDispatch } from "../../store/StoreProvider.js";
+import { useState } from "react";
 import { TiArrowForward, TiArrowBack } from "react-icons/ti";
 
 import "./styles/Starship.css";
 
 const Starship = ({ starships }) => {
-  const store = useStore();
-  const dispatch = useDispatch();
-
   const [currentShip, setCurrentShip] = useState(0);
-
-  const { characters, current } = store;
 
   const handleNext = () => {
     if (currentShip === starships.length - 1) return;
