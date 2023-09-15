@@ -43,10 +43,21 @@ If the repository is cloned, the <code>npm start</code> command must be executed
 </p>
 
 <hr />
+<h2>Project structure</h2>
+
+![Screenshot](src/assets/screenshot/structure.png)
 
 <code>/src/api/index.js</code>
 
 <p>In the 'api' folder it simulates a BackEnd. It was done that way since it was shown that it would be more convenient to obtain the information that way.</p>
+
+<code>/src/components</code>
+
+<p>The components that were considered necessary for the functionality of the project.</p>
+
+<code>/src/pages</code>
+
+<p>The page where only the components are assembled is only for re-rendering.</p>
 
 <code>/src/store/StoreReducer.js</code>
 
