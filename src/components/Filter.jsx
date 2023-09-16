@@ -52,7 +52,6 @@ const Filter = () => {
     dispatch({ type: "RESET" });
   };
 
-  //revisar bug de que, si estoy en la ultima posicion y filtro personaje, da un error de que no puede leer personajes con la propiedad undefined
   const handleChange = (event) => {
     event.preventDefault();
     setReset(1);
