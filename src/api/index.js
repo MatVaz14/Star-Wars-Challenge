@@ -53,6 +53,8 @@ const getCharacter = async (name) => {
         return {
           name: d.name,
           gender: d.gender,
+          mass: d.mass,
+          height: d.height,
           species: speciesData,
           homeworld: homeworldData,
           films: filmsData,

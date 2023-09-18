@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { BiHome } from "react-icons/bi";
+
 import Search from "./Search.jsx";
 import logo from "../assets/starWars.png";
 import "./styles/Navbar.css";
@@ -6,7 +9,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 AOS.init();
 
-const Navbar = () => {
+const Navbar = ({page}) => {
   return (
     <nav>
       <img
@@ -17,7 +20,8 @@ const Navbar = () => {
         width="150px"
         height="80px"
       />
-      <Search />
+      {page === 0 ? <Search /> : <Link className="link-back" to="/" data-aos="fade-right"
+        data-aos-duration="1500">Back <BiHome className="link-bi" /></Link>}
     </nav>
   );
 };

@@ -4,7 +4,7 @@ import "./Home.css";
 const Home = () => {
 	return (
 		<section>
-			<Navbar />
+			<Navbar page={0}/>
 			<Filter />
 			<Paginate />
 			<ListCharacter />

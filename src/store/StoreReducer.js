@@ -3,6 +3,7 @@ const LOADING = "LOADING";
 const PAGE = "PAGE";
 const RESET = "RESET";
 const INDEX = "INDEX";
+const CHARACTER_DETAIL = "CHARACTER_DETAIL";
 
 const FILTER_GENDER = "FILTER_GENDER";
 const FILTER_SPECIE = "FILTER_SPECIE";
@@ -16,6 +17,7 @@ const InitialState = {
   characters: [],
   //personajes con la ultima aplicacion de filtro
   lastFilterCharacter: [],
+  characterDetail: {},
   //pagina actual
   currentPage: 1,
   //cantidad de personajes por pagina
@@ -60,6 +62,12 @@ const StoreReducer = (state = InitialState, action) => {
         ...state,
         characters: [...state.charactersOrigin],
       };
+
+    case CHARACTER_DETAIL:
+      return {
+        ...state,
+        characterDetail: action.payload
+      }
 
     case FILTER_GENDER:
       let gender = [...state.charactersOrigin];

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useStore, useDispatch } from "../store/StoreProvider.js";
 import { getCharacter } from "../api";
 
@@ -21,6 +21,20 @@ const Search = () => {
   };
 
   const { charactersOrigin, isLoading, cantPerPage, currentPage } = store;
+
+    //indice exacto
+  const [index, setIndex] = useState(1);
+  useEffect(()=>{
+    let cant = Math.ceil(charactersOrigin.length / cantPerPage);
+     //console.log('cant de useEffect',cant)
+    // console.log('charactersOrigin.length de useeffect',charactersOrigin.length)
+    if(charactersOrigin === 0 || cant === 0){
+      setIndex(1);
+    }else{
+      setIndex(Math.ceil(charactersOrigin.length / cantPerPage))
+    }
+    //console.log('index de useEffect',index)
+  },[charactersOrigin, isLoading, cantPerPage, currentPage])
 
   //funcion para el formulario
   const handleSubmit = async (event) => {
@@ -63,29 +77,12 @@ const Search = () => {
       info.forEach((i) => dispatch({ type: "SEARCH", payload: i }));
 
       //Redireccionamos directamente a la opción que busco
-      let index = Math.ceil(charactersOrigin.length / cantPerPage);
-      if (index === 0) {
-        dispatch({ type: "PAGE", payload: 1 });
-      }
-      if (index === currentPage) {
-        dispatch({ type: "PAGE", payload: Number(index) });
-        dispatch({
-          type: "INDEX",
-          payload: [
-            Number((index - 1) * cantPerPage),
-            Number(index * cantPerPage),
-          ],
-        });
-      } else {
-        index = index + 1;
-        dispatch({ type: "PAGE", payload: Number(index) });
-        dispatch({
-          type: "INDEX",
-          payload: [
-            Number((index - 1) * cantPerPage),
-            Number(index * cantPerPage),
-          ],
-        });
+        //console.log('charactersOrigin.length',charactersOrigin.length)
+      if(index === 0){
+        dispatch({type:"PAGE", payload: 1})
+      }else{
+        dispatch({type:"PAGE", payload: index})
+        dispatch({type:"INDEX", payload:[(index-1)*cantPerPage,index*cantPerPage]})
       }
     } else {
       swal("Not Found!", "Character not found", "error");
