@@ -51,10 +51,10 @@ const getCharacter = async (name) => {
           : [];
         //retornamos cada objeto ya estructurado con su informacion correspondiente
         return {
-          name: d.name,
-          gender: d.gender,
-          mass: d.mass,
-          height: d.height,
+          name: d?.name,
+          gender: d?.gender,
+          mass: d?.mass,
+          height: d?.height,
           species: speciesData,
           homeworld: homeworldData,
           films: filmsData,
