@@ -18,7 +18,11 @@ It should be noted that 5 characters will be shown per page, so it has paginatio
 </em>
 </p>
 
-![Screenshot](src/assets/screenshot1/home3.png) 2. When you click on a character, additional information regarding that character will be displayed
+![Screenshot](src/assets/screenshot1/home3.png)
+
+<p>
+2. When you click on a character, additional information regarding that character will be displayed</p>
+
 ![Screenshot](src/assets/screenshot1/Detail.png)
 
 ## EXAMPLE
