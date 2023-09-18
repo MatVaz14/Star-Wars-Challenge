@@ -9,8 +9,7 @@ It is an application which allows you to search for characters from the Star War
 1. At first there will be no character, since it will be waiting for the user to enter the name of a character or even a single letter will be enough to search for a variety of characters that include that letter.
 </p>
 
-![Screenshot](src/assets/screenshot/search.png)
-![Screenshot](src/assets/screenshot/home.png)
+![Screenshot](src/assets/screenshot1/search.png)
 
 <p>
 When you search for a character it can be displayed on the screen, as characters are added there will be more options in the filters.
@@ -19,22 +18,26 @@ It should be noted that 5 characters will be shown per page, so it has paginatio
 </em>
 </p>
 
-![Screenshot](src/assets/screenshot/character.png)
+![Screenshot](src/assets/screenshot1/home3.png) 2. When you click on a character, additional information regarding that character will be displayed
+![Screenshot](src/assets/screenshot1/Detail.png)
 
 ## EXAMPLE
 
 <p>1. Search</p>
 
-![Screenshot](src/assets/screenshot/example/1.png)
+![Screenshot](src/assets/screenshot1/search.png)
 
 <p>2. Loading</p>
 
-![Screenshot](src/assets/screenshot/example/2.png)
+![Screenshot](src/assets/screenshot1/Loading.png)
 
-<p>3. Characters</p>
+<p>3. Result</p>
 
-![Screenshot](src/assets/screenshot/example/3.png)
-![Screenshot](src/assets/screenshot/example/4.png)
+![Screenshot](src/assets/screenshot1/Result.png)
+
+<p>4. Detail</p>
+
+![Screenshot](src/assets/screenshot1/Detail2.png)
 
 ## More Information
 
