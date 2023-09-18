@@ -9,7 +9,7 @@ It is an application which allows you to search for characters from the Star War
 1. At first there will be no character, since it will be waiting for the user to enter the name of a character or even a single letter will be enough to search for a variety of characters that include that letter.
 </p>
 
-![Screenshot](src/assets/screenshot1/search.png)
+![Screenshot](src/assets/screenshot1/Search.png)
 
 <p>
 When you search for a character it can be displayed on the screen, as characters are added there will be more options in the filters.
