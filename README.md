@@ -29,7 +29,7 @@ It should be noted that 5 characters will be shown per page, so it has paginatio
 
 <p>1. Search</p>
 
-![Screenshot](src/assets/screenshot1/search.png)
+![Screenshot](src/assets/screenshot1/Search.png)
 
 <p>2. Loading</p>
 
