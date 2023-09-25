@@ -1,14 +1,17 @@
-const SEARCH = "SEARCH";
-const LOADING = "LOADING";
-const PAGE = "PAGE";
-const RESET = "RESET";
-const INDEX = "INDEX";
-const CHARACTER_DETAIL = "CHARACTER_DETAIL";
-
-const FILTER_GENDER = "FILTER_GENDER";
-const FILTER_SPECIE = "FILTER_SPECIE";
-const FILTER_HOMEWORLD = "FILTER_HOMEWORLD";
-const FILTER_FILM = "FILTER_FILM";
+import {
+  SEARCH,
+  LETTERS,
+  LOADING,
+  LOADING_DETAIL,
+  PAGE,
+  RESET,
+  INDEX,
+  INDEX_BTN,
+  CHARACTER_DETAIL,
+  FILTER_GENDER,
+  FILTER_HOMEWORLD,
+} from "./action_type.js";
+import { deleteDuplicate } from "./action.js";
 
 const InitialState = {
   //aqui guardo toda la informacion de los personajes
@@ -17,31 +20,63 @@ const InitialState = {
   characters: [],
   //personajes con la ultima aplicacion de filtro
   lastFilterCharacter: [],
+  searchedLetters: [],
   characterDetail: {},
   //pagina actual
   currentPage: 1,
   //cantidad de personajes por pagina
-  cantPerPage: 5, //Modificar estos valores por si se quieren mostrar diferentes valores en la pagina
+  cantPerPage: 6, //Modificar estos valores por si se quieren mostrar diferentes valores en la pagina
   //indices del arreglo
   indexOne: 0,
-  indexTwo: 5, //Modificar estos valores por si se quieren mostrar diferentes valores en la pagina
+  indexTwo: 6, //Modificar estos valores por si se quieren mostrar diferentes valores en la pagina
+
+  //indices para mostrar una cantidad máxima de botones paginado
+  minBtn: 0,
+  maxBtn: 5,
   //para mostrar en pantalla si esta cargando
   isLoading: false,
+  isLoadingDetail: false,
 };
 
 const StoreReducer = (state = InitialState, action) => {
   switch (action.type) {
     case SEARCH:
+      let copyCharactersOrigin = [
+        ...state.charactersOrigin,
+        action.payload,
+      ].reduce((result, current) => {
+        if (Array.isArray(current)) {
+          return result.concat(current);
+        } else {
+          result.push(current);
+          return result;
+        }
+      }, []);
+
+      let onlyCharacters = deleteDuplicate(copyCharactersOrigin, "name");
+
       return {
         ...state,
-        charactersOrigin: [...state.charactersOrigin, action.payload],
-        characters: [...state.characters, action.payload],
+        charactersOrigin: onlyCharacters,
+        characters: onlyCharacters,
+      };
+
+    case LETTERS:
+      return {
+        ...state,
+        searchedLetters: [...state.searchedLetters, action.payload.toString()],
       };
 
     case LOADING:
       return {
         ...state,
         isLoading: !state.isLoading,
+      };
+
+    case LOADING_DETAIL:
+      return {
+        ...state,
+        isLoadingDetail: !state.isLoadingDetail,
       };
 
     case PAGE:
@@ -57,6 +92,13 @@ const StoreReducer = (state = InitialState, action) => {
         indexTwo: action.payload[1],
       };
 
+    case INDEX_BTN:
+      return {
+        ...state,
+        minBtn: action.payload[0],
+        maxBtn: action.payload[1],
+      };
+
     case RESET:
       return {
         ...state,
@@ -66,8 +108,8 @@ const StoreReducer = (state = InitialState, action) => {
     case CHARACTER_DETAIL:
       return {
         ...state,
-        characterDetail: action.payload
-      }
+        characterDetail: action.payload,
+      };
 
     case FILTER_GENDER:
       let gender = [...state.charactersOrigin];
@@ -85,27 +127,6 @@ const StoreReducer = (state = InitialState, action) => {
         lastFilterCharacter: filterGender,
       };
 
-    case FILTER_SPECIE:
-      let specie = [];
-      if (state.lastFilterCharacter.length > 1) {
-        specie = [...state.lastFilterCharacter];
-      } else {
-        specie = [...state.charactersOrigin];
-      }
-      let filterSpecie = [];
-      if (action.payload === "allSpecie") {
-        filterSpecie = specie;
-      } else {
-        filterSpecie = specie?.filter(
-          (character) => character.species[0]?.name === action.payload
-        );
-      }
-      return {
-        ...state,
-        characters: filterSpecie,
-        lastFilterCharacter: filterSpecie,
-      };
-
     case FILTER_HOMEWORLD:
       let home = [];
       if (state.lastFilterCharacter.length > 1) {
@@ -121,34 +142,15 @@ const StoreReducer = (state = InitialState, action) => {
           (character) => character.homeworld?.name === action.payload
         );
       }
+      if (filterHomeworld.length === 0) {
+        filterHomeworld = [...state.charactersOrigin]?.filter(
+          (character) => character.homeworld?.name === action.payload
+        );
+      }
       return {
         ...state,
         characters: filterHomeworld,
         lastFilterCharacter: filterHomeworld,
-      };
-
-    case FILTER_FILM:
-      let film = [];
-      if (state.lastFilterCharacter.length > 1) {
-        film = [...state.lastFilterCharacter];
-      } else {
-        film = [...state.charactersOrigin];
-      }
-      let filterFilm = [];
-
-      if (action.payload === "allFilm") {
-        filterFilm = film;
-      } else {
-        //filtramos los elementos y verificamos que alguno cumpla la condicion (que este en la pelicula)
-        filterFilm = film.filter((ch) => {
-          return ch.films.some((film) => film?.title === action.payload);
-        });
-      }
-
-      return {
-        ...state,
-        characters: filterFilm,
-        lastFilterCharacter: filterFilm,
       };
 
     default:

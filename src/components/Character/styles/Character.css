@@ -39,11 +39,6 @@ box-shadow: -3px 18px 29px 0px rgba(191,191,191,0.1);
 	margin: 10px;
 	box-sizing: border-box;
 }
-.container-character .detail-character .extra-detail .bg-homeworld:hover {
-	transition: .3s;
-	transform: scale(1.05);
-	background-color: rgba(130, 130, 130, 0.2);
-}
 .gender-text {
 	font-size: 32px;
 	color: white;

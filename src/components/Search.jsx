@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import { useStore, useDispatch } from "../store/StoreProvider.js";
 import { getCharacter } from "../api";
 
@@ -19,75 +19,77 @@ const Search = () => {
   const handleName = (event) => {
     setName(event.target.value);
   };
-
-  const { charactersOrigin, isLoading, cantPerPage, currentPage } = store;
-
-    //indice exacto
-  const [index, setIndex] = useState(1);
-  useEffect(()=>{
-    let cant = Math.ceil(charactersOrigin.length / cantPerPage);
-     //console.log('cant de useEffect',cant)
-    // console.log('charactersOrigin.length de useeffect',charactersOrigin.length)
-    if(charactersOrigin === 0 || cant === 0){
-      setIndex(1);
-    }else{
-      setIndex(Math.ceil(charactersOrigin.length / cantPerPage))
-    }
-    //console.log('index de useEffect',index)
-  },[charactersOrigin, isLoading, cantPerPage, currentPage])
+  const { charactersOrigin, cantPerPage, isLoading, searchedLetters } = store;
 
   //funcion para el formulario
   const handleSubmit = async (event) => {
     event.preventDefault();
     dispatch({ type: "LOADING" });
-
-    // Buscamos que el personaje que queremos no esté en nuestro estado global, si existe, finaliza la ejecución
-    let exist = charactersOrigin.find((character) =>
-      character?.name?.toLowerCase().includes(name.toLowerCase())
-    );
-
-    if (exist) {
-      // Buscamos la posición en la que se encuentra el personaje que necesitamos
-      let index = charactersOrigin.findIndex((character) =>
-        character.name.toLowerCase().includes(name.toLowerCase())
+    //==========
+    if (searchedLetters?.length) {
+      let existLetter = searchedLetters.find(
+        (letter) => letter.toLowerCase() === name.toLowerCase()
       );
-      const pageIndex = Math.ceil((index + 1) / cantPerPage); // Calcula la página
+      if (existLetter) {
+        swal("YA SE BUSCARON TODOS LOS PERSONAJES CON ESAS/ESA LETRA");
+        dispatch({ type: "LOADING" });
+        setName("");
+        return;
+      }
+    }
+    //======
+    if (name?.length >= 3) {
+      let exist = charactersOrigin.find(
+        (character) => character.name.toLowerCase() === name.toLowerCase()
+      );
+
+      if (exist) {
+        let index = charactersOrigin.findIndex((character) =>
+          character.name.toLowerCase().includes(name.toLowerCase())
+        );
+        const pageIndex = Math.ceil((index + 1) / cantPerPage); // Calcula la página
+        dispatch({ type: "LOADING" });
+        setName("");
+        swal(
+          "Already Exist!",
+          `The character has already been searched, page ${pageIndex}`,
+          "warning"
+        );
+        dispatch({ type: "PAGE", payload: pageIndex });
+        dispatch({
+          type: "INDEX",
+          payload: [
+            Number((pageIndex - 1) * cantPerPage),
+            Number(pageIndex * cantPerPage),
+          ],
+        });
+        return;
+      }
+    }
+    //======
+    if (name.length >= 1 && name.length <= 2) {
+      dispatch({ type: "LETTERS", payload: name });
+    }
+
+    const firstLetter = name.charAt(0).toLowerCase();
+    if (searchedLetters.includes(firstLetter)) {
+      swal(
+        `Ya se han buscado personajes que incluyan esa/esas letras. 
+        ( ${name[0].toUpperCase()} )`
+      );
       dispatch({ type: "LOADING" });
       setName("");
-      swal(
-        "Already Exist!",
-        `The character has already been searched, page ${pageIndex}`,
-        "warning"
-      );
-      dispatch({ type: "PAGE", payload: pageIndex });
-      dispatch({
-        type: "INDEX",
-        payload: [
-          Number((pageIndex - 1) * cantPerPage),
-          Number(pageIndex * cantPerPage),
-        ],
-      });
       return;
     }
 
-    let info = await getCharacter(name);
+    //buscamos el personaje/ los personajes
+    let character = await getCharacter(name);
+    dispatch({
+      type: "SEARCH",
+      payload: character?.length === 1 ? character[0] : character,
+    });
 
-    // Verificamos si info contiene datos válidos antes de realizar el dispatch y demás
-    if (info && info.length > 0) {
-      info.forEach((i) => dispatch({ type: "SEARCH", payload: i }));
-
-      //Redireccionamos directamente a la opción que busco
-        //console.log('charactersOrigin.length',charactersOrigin.length)
-      if(index === 0){
-        dispatch({type:"PAGE", payload: 1})
-      }else{
-        dispatch({type:"PAGE", payload: index})
-        dispatch({type:"INDEX", payload:[(index-1)*cantPerPage,index*cantPerPage]})
-      }
-    } else {
-      swal("Not Found!", "Character not found", "error");
-    }
-
+    //==========
     dispatch({ type: "LOADING" });
     setName("");
   };

@@ -7,7 +7,15 @@ const Paginate = () => {
   const store = useStore();
   const dispatch = useDispatch();
 
-  const { characters, currentPage, cantPerPage, indexOne, indexTwo } = store;
+  const {
+    characters,
+    currentPage,
+    cantPerPage,
+    indexOne,
+    indexTwo,
+    minBtn,
+    maxBtn,
+  } = store;
 
   //Datos para paginado
   //Calculamos cantidad de botones dependiendo de la cantidad de personajes
@@ -36,6 +44,8 @@ const Paginate = () => {
       type: "INDEX",
       payload: [indexOne - cantPerPage, indexTwo - cantPerPage],
     });
+    if (minBtn === 0) return;
+    dispatch({ type: "INDEX_BTN", payload: [minBtn - 1, maxBtn - 1] });
   };
 
   const handleNext = () => {
@@ -45,6 +55,9 @@ const Paginate = () => {
       type: "INDEX",
       payload: [indexOne + cantPerPage, indexTwo + cantPerPage],
     });
+    if (maxBtn !== buttons.length) {
+      dispatch({ type: "INDEX_BTN", payload: [minBtn + 1, maxBtn + 1] });
+    }
   };
 
   return (
@@ -57,16 +70,19 @@ const Paginate = () => {
       >
         <TiArrowBack />
       </button>
-      {buttons.map((btn) => (
-        <button
-          className={`${currentPage === btn + 1 && "active"} btns`}
-          key={btn + 1}
-          value={btn + 1}
-          onClick={handleClick}
-        >
-          {btn + 1}
-        </button>
-      ))}
+      {buttons
+        .map((btn) => (
+          <button
+            className={`${currentPage === btn + 1 && "active"} btns`}
+            key={btn + 1}
+            value={btn + 1}
+            onClick={handleClick}
+          >
+            {btn + 1}
+          </button>
+        ))
+        .slice(minBtn, maxBtn)}
+
       <button
         className={`${buttons.length ? "btn-style" : "no-btn"} ${
           currentPage === cantButtons && "disabled"

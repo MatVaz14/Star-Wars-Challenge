@@ -20,7 +20,6 @@ form input {
 	font-size: 19px;
 }
 form button {
-	transition: .5s;
 	box-sizing: border-box;
 	color: yellow;
 	height: 100%;
@@ -34,14 +33,26 @@ form button {
 	cursor: pointer;
 	font-size: 17.5px;
 }
-form input:focus {
-	border: 3px solid yellow;
-}
 form button:hover {
 	transition: .3s;
 	background: rgba(277, 277, 277, 0.3);
 
 }
+form input:focus {
+	outline: none;
+	border-right: none;
+	border-top: 3px solid white;
+	border-left: 3px solid white;
+	border-bottom: 3px solid white;
+}
+form input:focus + button {
+  border-left: none;
+  border-top: 3px solid white;
+  border-right: 3px solid white;
+  border-bottom: 3px solid white;
+  color: white;
+}
+
 
 @media (max-width: 640px){
 	form {

@@ -14,57 +14,51 @@ const getHomeworld = async (url) => {
   }
 };
 
-const getDetail = async (url) => {
-  try {
-    let data = await Promise.all(
-      url?.map(async (film) => {
-        let dataFilm = await axios.get(film);
-        return await dataFilm.data;
-      })
-    );
-    return data;
-  } catch (error) {
-    swal("Oops!", "Seems like we couldn't fetch the info", "error");
-  }
+const getInfo = async (d) => {
+  const [homeworldData] = await Promise.all([getHomeworld(d.homeworld)]);
+  //retornamos cada objeto ya estructurado con su informacion correspondiente
+  return {
+    name: d?.name,
+    gender: d?.gender,
+    mass: d?.mass,
+    height: d?.height,
+    species: d?.species,
+    homeworld: homeworldData,
+    films: d?.films,
+    starships: d?.starships,
+  };
 };
 
 const getCharacter = async (name) => {
   try {
+    let page = 1;
     const response = await axios.get(
       `https://swapi.dev/api/people/?search=${name}`
     );
     //contiene un arreglo, puede tener un objeto o varios objetos
     const data = response.data.results;
-
-    //Devolvemos objetos con una estructura definida
-
-    const info = await Promise.all(
-      data?.map(async (d) => {
-        //Obtenemos la informacion que teniamos en los arrays (urls), y las devolvemos como objetos directamente
-        let homeworldData = d.homeworld.length
-          ? await getHomeworld(d.homeworld)
-          : "";
-        let filmsData = d.films.length ? await getDetail(d.films) : [];
-        let speciesData = d.species.length ? await getDetail(d.species) : [];
-        let starshipsData = d.starships.length
-          ? await getDetail(d.starships)
-          : [];
-        //retornamos cada objeto ya estructurado con su informacion correspondiente
-        return {
-          name: d?.name,
-          gender: d?.gender,
-          mass: d?.mass,
-          height: d?.height,
-          species: speciesData,
-          homeworld: homeworldData,
-          films: filmsData,
-          starships: starshipsData,
-        };
-      })
-    );
-
+    let info = [];
+    if (info.length === 0) {
+      info = await Promise.all(data.map((d) => getInfo(d)));
+    }
+    while (response.data.next !== null) {
+      page++;
+      const response = await axios.get(
+        `https://swapi.dev/api/people/?search=${name}&page=${page}`
+      );
+      if (response.data.next === null) break;
+      const data = response.data.results;
+      info = [...info, await Promise.all(data.map((d) => getInfo(d)))];
+    }
     if (data.length || data !== undefined) {
-      return info;
+      return info.reduce((result, current) => {
+        if (Array.isArray(current)) {
+          return result.concat(current);
+        } else {
+          result.push(current);
+          return result;
+        }
+      }, []);
     } else {
       return swal("Oops!", "No se encontraron resultados...", "warning");
     }

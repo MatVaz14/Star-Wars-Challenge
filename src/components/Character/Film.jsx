@@ -1,12 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { imageFilms } from "../../assets";
 import portada from "../../assets/PortadaStarWars.jpg";
 import { TiArrowForward, TiArrowBack } from "react-icons/ti";
 
+import LoadingDetail from "./LoadingDetail.jsx";
 import "./styles/Film.css";
+import { getDetail } from "../../api/controller";
 
 const Film = ({ film }) => {
   const [currentFilm, setCurrentFilm] = useState(0);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getDetail(film).then((response) => setData(response));
+  }, [film]);
 
   const handleNext = () => {
     if (currentFilm === film.length - 1) return;
@@ -21,7 +28,7 @@ const Film = ({ film }) => {
   const getImage = () => {
     const image = imageFilms.find(
       (img) =>
-        img.name?.toLowerCase() === film[currentFilm]?.title.toLowerCase()
+        img.name?.toLowerCase() === data[currentFilm]?.title.toLowerCase()
     );
     //console.log(image);
 
@@ -34,45 +41,51 @@ const Film = ({ film }) => {
 
   return (
     <div className="container-film">
-      <div>
-        <div className="film-header">
-          <h2>FILMS</h2>
-          <div className="btns-film">
-            <button
-              className={`${currentFilm === 0 && "disabled"}`}
-              onClick={handlePrev}
-            >
-              <TiArrowBack />
-            </button>
-            <button
-              className={`${currentFilm === film.length - 1 && "disabled"}`}
-              onClick={handleNext}
-            >
-              <TiArrowForward />
-            </button>
-          </div>
-        </div>
-        <div className="film-extra-detail">
-          <h3>{film[currentFilm]?.title}</h3>
-          <cite>{film[currentFilm]?.opening_crawl}</cite>
-          <hr />
+      {data.length === 0 ? (
+        <LoadingDetail />
+      ) : (
+        <>
           <div>
-            <p>
-              <span>Director</span> - {film[currentFilm]?.director} <br />
-              <span>Producer</span> - {film[currentFilm]?.producer} <br />
-              <span>Relase Date</span> - {film[currentFilm]?.release_date}
-            </p>
+            <div className="film-header">
+              <h2>FILMS</h2>
+              <div className="btns-film">
+                <button
+                  className={`${currentFilm === 0 && "disabled"}`}
+                  onClick={handlePrev}
+                >
+                  <TiArrowBack />
+                </button>
+                <button
+                  className={`${currentFilm === film.length - 1 && "disabled"}`}
+                  onClick={handleNext}
+                >
+                  <TiArrowForward />
+                </button>
+              </div>
+            </div>
+            <div className="film-extra-detail">
+              <h3>{data[currentFilm]?.title}</h3>
+              <cite>{data[currentFilm]?.opening_crawl}</cite>
+              <hr />
+              <div>
+                <p>
+                  <span>Director</span> - {data[currentFilm]?.director} <br />
+                  <span>Producer</span> - {data[currentFilm]?.producer} <br />
+                  <span>Relase Date</span> - {data[currentFilm]?.release_date}
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <img
-        className="img-detail"
-        loading="lazy"
-        src={getImage()}
-        alt="portada"
-        width="260px"
-        height="300px"
-      />
+          <img
+            className="img-detail"
+            loading="lazy"
+            src={getImage()}
+            alt="portada"
+            width="260px"
+            height="300px"
+          />
+        </>
+      )}
     </div>
   );
 };

@@ -12,10 +12,10 @@ const ListCharacter = () => {
   const store = useStore();
 
   const { charactersOrigin, isLoading, characters, indexOne, indexTwo } = store;
-
+  console.log(charactersOrigin);
   return (
     <div className="container-listCharacter">
-      {charactersOrigin.length === 0 ? <Welcome isLoading={isLoading}/> : null}
+      {charactersOrigin.length === 0 ? <Welcome isLoading={isLoading} /> : null}
       {characters.length
         ? characters
             ?.map((character) => (

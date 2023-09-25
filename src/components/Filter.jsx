@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useStore, useDispatch } from "../store/StoreProvider.js";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { AiOutlineClose } from "react-icons/ai";
+import { TiArrowForward, TiArrowBack } from "react-icons/ti";
 
 import "./styles/Filter.css";
 
@@ -26,18 +25,6 @@ const Filter = () => {
     .filter((value, index, self) => {
       return self.indexOf(value) === index;
     });
-  let getSpecie = charactersOrigin
-    ?.map((character) => character.species[0])
-    .filter((value, index, self) => {
-      // Filtrar solo los valores que no son undefined
-      return value !== undefined && self.indexOf(value) === index;
-    });
-
-  let getFilm = (
-    charactersOrigin?.flatMap((character) => character.films) ?? []
-  )
-    .map((film) => film.title)
-    .filter((value, index, self) => self.indexOf(value) === index);
 
   let getHomeworld = charactersOrigin
     ?.map((character) => character.homeworld.name)
@@ -60,20 +47,10 @@ const Filter = () => {
       dispatch({ type: "INDEX", payload: [0, cantPerPage] });
       dispatch({ type: "FILTER_GENDER", payload: event.target.value });
     }
-    if (event.target.name === "specie") {
-      dispatch({ type: "PAGE", payload: 1 });
-      dispatch({ type: "INDEX", payload: [0, cantPerPage] });
-      dispatch({ type: "FILTER_SPECIE", payload: event.target.value });
-    }
     if (event.target.name === "homeworld") {
       dispatch({ type: "PAGE", payload: 1 });
       dispatch({ type: "INDEX", payload: [0, cantPerPage] });
       dispatch({ type: "FILTER_HOMEWORLD", payload: event.target.value });
-    }
-    if (event.target.name === "film") {
-      dispatch({ type: "PAGE", payload: 1 });
-      dispatch({ type: "INDEX", payload: [0, cantPerPage] });
-      dispatch({ type: "FILTER_FILM", payload: event.target.value });
     }
   };
 
@@ -82,12 +59,13 @@ const Filter = () => {
       {charactersOrigin.length !== 0 ? (
         <div className="container-btn-menu">
           {menu === 0 ? (
-            <GiHamburgerMenu onClick={() => setMenu(1)} className="btn-menu" />
+            <span onClick={() => setMenu(1)} className="btn-menu btn-menu-bg">
+              <TiArrowForward />
+            </span>
           ) : (
-            <AiOutlineClose
-              onClick={() => setMenu(0)}
-              className="btn-menu btn-menu-exit"
-            />
+            <span onClick={() => setMenu(0)} className="btn-menu btn-menu-exit">
+              <TiArrowBack />
+            </span>
           )}
         </div>
       ) : null}
@@ -114,20 +92,6 @@ const Filter = () => {
             ))}
           </select>
           <select
-            defaultValue={"allSpecie"}
-            onChange={handleChange}
-            name="specie"
-          >
-            <option value="allSpecie" selected={reset === 0 ? true : false}>
-              All Species
-            </option>
-            {getSpecie?.map((specie) => (
-              <option key={specie.name} value={specie.name}>
-                {specie.name?.charAt(0).toUpperCase() + specie.name?.slice(1)}
-              </option>
-            ))}
-          </select>
-          <select
             defaultValue={"allHomeworld"}
             onChange={handleChange}
             name="homeworld"
@@ -138,16 +102,6 @@ const Filter = () => {
             {getHomeworld?.map((home) => (
               <option key={home} value={home}>
                 {home}
-              </option>
-            ))}
-          </select>
-          <select defaultValue={"allFilm"} onChange={handleChange} name="film">
-            <option value="allFilm" selected={reset === 0 ? true : false}>
-              All Films
-            </option>
-            {getFilm?.map((film) => (
-              <option key={film} value={film}>
-                {film}
               </option>
             ))}
           </select>
