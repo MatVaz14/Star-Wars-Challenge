@@ -84,6 +84,10 @@ const Search = () => {
 
     //buscamos el personaje/ los personajes
     let character = await getCharacter(name);
+    if (character.length === 0)
+      swal(
+        "No es encontraron personajes, revisa que sea un personaje o letra valida"
+      );
     dispatch({
       type: "SEARCH",
       payload: character?.length === 1 ? character[0] : character,
