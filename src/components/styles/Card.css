@@ -1,6 +1,12 @@
 .link-detail {
 	text-decoration: none;
 }
+.link-bg {
+	width: fit-content;
+	box-sizing: border-box;
+	height: fit-content;
+	margin: 10px 16px;
+}
 .card_container {
 	transition: .5s;
 	color: white;
@@ -8,7 +14,6 @@
 	height: 250px;
 	border: 4px solid rgba(100, 100, 100, 0.4);
 	background-color: rgba(118, 118, 118, 0.3);
-	margin: 10px 16px;
 	border-radius: 15px;
 }
 .card_container:hover {

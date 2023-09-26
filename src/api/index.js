@@ -15,7 +15,7 @@ const getHomeworld = async (url) => {
 };
 
 const getInfo = async (d) => {
-  const [homeworldData] = await Promise.all([getHomeworld(d.homeworld)]);
+  const [homeworldData] = await Promise.all([getHomeworld(d?.homeworld)]);
   //retornamos cada objeto ya estructurado con su informacion correspondiente
   return {
     name: d?.name,

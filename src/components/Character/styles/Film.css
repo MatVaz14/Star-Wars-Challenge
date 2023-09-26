@@ -48,9 +48,16 @@
 .container-film .film-extra-detail {
 	width: 90%;
 }
-.container-film .film-extra-detail p span {
+.container-film .film-extra-detail h3 {
+	font-family: 'Poppins';
+}
+.container-film .film-extra-detail cite {
+	font-family: 'Poppins';
+}
+.container-film .film-extra-detail p span{
 	font-weight: bold;
 	font-size: 18px;
+	font-family: 'Poppins';
 }
 .container-film img {
 	transition: .5s;

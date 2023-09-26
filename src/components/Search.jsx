@@ -39,8 +39,8 @@ const Search = () => {
     }
     //======
     if (name?.length >= 3) {
-      let exist = charactersOrigin.find(
-        (character) => character.name.toLowerCase() === name.toLowerCase()
+      let exist = charactersOrigin.find((character) =>
+        character.name.toLowerCase().includes(name.toLowerCase())
       );
 
       if (exist) {

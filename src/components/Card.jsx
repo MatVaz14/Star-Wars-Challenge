@@ -38,7 +38,9 @@ const Card = ({
     <Link
       to={`${isLoading ? "/" : "/detail"}`}
       onClick={handleClick}
-      className={`${isLoading ? "cursor-link link-detail" : "link-detail"}`}
+      className={`${
+        isLoading ? "cursor-link link-detail" : "link-detail"
+      } link-bg`}
     >
       <div className="card_container">
         <h1>{name}</h1>
