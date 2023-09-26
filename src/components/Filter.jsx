@@ -45,11 +45,13 @@ const Filter = () => {
     if (event.target.name === "gender") {
       dispatch({ type: "PAGE", payload: 1 });
       dispatch({ type: "INDEX", payload: [0, cantPerPage] });
+      dispatch({ type: "INDEX_BTN", payload: [0, 5] });
       dispatch({ type: "FILTER_GENDER", payload: event.target.value });
     }
     if (event.target.name === "homeworld") {
       dispatch({ type: "PAGE", payload: 1 });
       dispatch({ type: "INDEX", payload: [0, cantPerPage] });
+      dispatch({ type: "INDEX_BTN", payload: [0, 5] });
       dispatch({ type: "FILTER_HOMEWORLD", payload: event.target.value });
     }
   };

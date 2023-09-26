@@ -56,6 +56,11 @@ const Search = () => {
           "warning"
         );
         dispatch({ type: "PAGE", payload: pageIndex });
+        if (pageIndex >= 0 && pageIndex <= 5) {
+          dispatch({ type: "INDEX_BTN", payload: [0, 5] });
+        } else {
+          dispatch({ type: "INDEX_BTN", payload: [pageIndex - 5, pageIndex] });
+        }
         dispatch({
           type: "INDEX",
           payload: [
@@ -67,10 +72,9 @@ const Search = () => {
       }
     }
     //======
-    if (name.length >= 1 && name.length <= 2) {
+    if (name.length >= 1 && name.length <= 3) {
       dispatch({ type: "LETTERS", payload: name });
     }
-
     const firstLetter = name.charAt(0).toLowerCase();
     if (searchedLetters.includes(firstLetter)) {
       swal(
@@ -81,7 +85,6 @@ const Search = () => {
       setName("");
       return;
     }
-
     //buscamos el personaje/ los personajes
     let character = await getCharacter(name);
     if (character.length === 0)
