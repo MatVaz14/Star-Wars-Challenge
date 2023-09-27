@@ -1,7 +1,8 @@
-import "./styles/Card.css";
 import { Link } from "react-router-dom";
 
 import { useDispatch, useStore } from "../store/StoreProvider.js";
+
+import "./styles/Card.css";
 
 const Card = ({
   name = "",

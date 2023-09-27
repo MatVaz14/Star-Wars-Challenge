@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { FaSearchPlus } from "react-icons/fa";
+
 import { useStore, useDispatch } from "../store/StoreProvider.js";
 import { getCharacter } from "../api";
 
-import { FaSearchPlus } from "react-icons/fa";
-import swal from "sweetalert";
 import "./styles/Search.css";
 
+import swal from "sweetalert";
 import AOS from "aos";
 import "aos/dist/aos.css";
 AOS.init();

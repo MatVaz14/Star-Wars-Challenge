@@ -15,17 +15,18 @@ const getHomeworld = async (url) => {
 };
 
 const getInfo = async (d) => {
-  const [homeworldData] = await Promise.all([getHomeworld(d?.homeworld)]);
-  //retornamos cada objeto ya estructurado con su informacion correspondiente
+  if (!d) return {}; // Si el objeto d es nulo o indefinido, retornar un objeto vacío
+  const homeworldData = await getHomeworld(d.homeworld);
+  const { name, gender, mass, height, species, films, starships } = d;
   return {
-    name: d?.name,
-    gender: d?.gender,
-    mass: d?.mass,
-    height: d?.height,
-    species: d?.species,
+    name,
+    gender,
+    mass,
+    height,
+    species,
     homeworld: homeworldData,
-    films: d?.films,
-    starships: d?.starships,
+    films,
+    starships,
   };
 };
 
