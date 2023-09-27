@@ -51,3 +51,8 @@ box-shadow: 1px 0px 18px 0px rgba(255,248,90,0.75);
 .cursor-link {
 	cursor: no-drop;
 }
+@media (max-width: 300px){
+	.card_container {
+		width: 100vw!important;
+	}
+}

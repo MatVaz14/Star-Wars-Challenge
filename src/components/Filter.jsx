@@ -42,6 +42,12 @@ const Filter = () => {
   const handleChange = (event) => {
     event.preventDefault();
     setReset(1);
+    if (event.target.name === "alph") {
+      dispatch({ type: "PAGE", payload: 1 });
+      dispatch({ type: "INDEX", payload: [0, cantPerPage] });
+      dispatch({ type: "INDEX_BTN", payload: [0, 5] });
+      dispatch({ type: "FILTER_ALPH", payload: event.target.value });
+    }
     if (event.target.name === "gender") {
       dispatch({ type: "PAGE", payload: 1 });
       dispatch({ type: "INDEX", payload: [0, cantPerPage] });
@@ -79,6 +85,15 @@ const Filter = () => {
       >
         <div className={`${menu === 1 ? "container_btn_filter" : null}`}>
           <button onClick={handleReset}>Reset Filters</button>
+
+          <select defaultValue={"default"} onChange={handleChange} name="alph">
+            <option value="default" selected={reset === 0 ? true : false}>
+              Alphabetic
+            </option>
+            <option value="az">A - Z</option>
+            <option value="za">Z - A</option>
+          </select>
+
           <select
             defaultValue={"allGender"}
             onChange={handleChange}

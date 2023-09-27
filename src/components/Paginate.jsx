@@ -55,8 +55,10 @@ const Paginate = () => {
       type: "INDEX",
       payload: [indexOne + cantPerPage, indexTwo + cantPerPage],
     });
-    if (maxBtn !== buttons.length) {
-      dispatch({ type: "INDEX_BTN", payload: [minBtn + 1, maxBtn + 1] });
+    if (cantButtons >= 5) {
+      if (maxBtn !== buttons.length) {
+        dispatch({ type: "INDEX_BTN", payload: [minBtn + 1, maxBtn + 1] });
+      }
     }
   };
 

@@ -53,7 +53,7 @@ const Search = () => {
         setName("");
         swal(
           "Already Exist!",
-          `The character has already been searched, page ${pageIndex}`,
+          `The character has already been searched`,
           "warning"
         );
         dispatch({ type: "PAGE", payload: pageIndex });

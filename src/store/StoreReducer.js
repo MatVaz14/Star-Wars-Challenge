@@ -8,6 +8,7 @@ import {
   INDEX,
   INDEX_BTN,
   CHARACTER_DETAIL,
+  FILTER_ALPH,
   FILTER_GENDER,
   FILTER_HOMEWORLD,
 } from "./action_type.js";
@@ -103,6 +104,27 @@ const StoreReducer = (state = InitialState, action) => {
       return {
         ...state,
         characters: [...state.charactersOrigin],
+      };
+
+    case FILTER_ALPH:
+      let orderAlph = [...state.charactersOrigin];
+      let filterAlph = [];
+      if (action.payload === "default") {
+        filterAlph = orderAlph;
+      } else {
+        filterAlph = orderAlph.sort((a, b) => {
+          if (a.name > b.name) {
+            return "az" === action.payload ? 1 : -1;
+          }
+          if (a.name < b.name) {
+            return "za" === action.payload ? 1 : -1;
+          }
+        });
+      }
+      return {
+        ...state,
+        characters: filterAlph,
+        lastFilterCharacter: filterAlph,
       };
 
     case CHARACTER_DETAIL:

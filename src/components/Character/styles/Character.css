@@ -25,7 +25,7 @@ box-shadow: -3px 18px 29px 0px rgba(191,191,191,0.1);
 .container-character .detail-character .extra-detail {
 	display: grid;
 	box-sizing: border-box;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(2, 1fr);
 	gap: 5px;
 }
 .container-character .detail-character .extra-detail .bg-homeworld {
