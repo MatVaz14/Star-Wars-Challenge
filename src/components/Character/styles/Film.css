@@ -61,6 +61,7 @@
 }
 .container-film img {
 	transition: .5s;
+	margin: auto;
 	width: 260px;
 	border-radius: 10px;
 }
@@ -78,9 +79,8 @@
 		width: 100%;
 	}
 	.container-film img {
-		object-fit: cover;
 		margin-top: 20px;
-		height: 250px;
-		width:  max-content;
+		height: 280px;
+		width:  230px;
 	}
 }

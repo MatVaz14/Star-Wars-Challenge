@@ -32,7 +32,7 @@ const Search = () => {
         (letter) => letter.toLowerCase() === name.toLowerCase()
       );
       if (existLetter) {
-        swal("YA SE BUSCARON TODOS LOS PERSONAJES CON ESAS/ESA LETRA");
+        swal("ALL CHARACTERS WITH THOSE/THAT LETTER WERE ALREADY SEARCHED");
         dispatch({ type: "LOADING" });
         setName("");
         return;
@@ -90,13 +90,26 @@ const Search = () => {
     let character = await getCharacter(name);
     if (character.length === 0)
       swal(
-        "No es encontraron personajes, revisa que sea un personaje o letra valida"
+        "No characters were found, check that it is a valid character or letter"
       );
     dispatch({
       type: "SEARCH",
       payload: character?.length === 1 ? character[0] : character,
     });
-
+    const pageIndex = Math.ceil(charactersOrigin.length / cantPerPage); // Calcula la página
+    dispatch({ type: "PAGE", payload: pageIndex });
+    if (pageIndex >= 0 && pageIndex <= 5) {
+      dispatch({ type: "INDEX_BTN", payload: [0, 5] });
+    } else {
+      dispatch({ type: "INDEX_BTN", payload: [pageIndex - 5, pageIndex] });
+    }
+    dispatch({
+      type: "INDEX",
+      payload: [
+        Number((pageIndex - 1) * cantPerPage),
+        Number(pageIndex * cantPerPage),
+      ],
+    });
     //==========
     dispatch({ type: "LOADING" });
     setName("");

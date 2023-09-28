@@ -45,7 +45,7 @@ const Film = ({ film }) => {
         <LoadingDetail />
       ) : (
         <>
-          <div>
+          <div className="bg-container-film">
             <div className="film-header">
               <h2>FILMS</h2>
               <div className="btns-film">
