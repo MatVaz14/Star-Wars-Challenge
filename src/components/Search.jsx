@@ -20,7 +20,13 @@ const Search = () => {
   const handleName = (event) => {
     setName(event.target.value);
   };
-  const { charactersOrigin, cantPerPage, isLoading, searchedLetters } = store;
+  const {
+    charactersOrigin,
+    characters,
+    cantPerPage,
+    isLoading,
+    searchedLetters,
+  } = store;
 
   //funcion para el formulario
   const handleSubmit = async (event) => {
@@ -45,7 +51,7 @@ const Search = () => {
       );
 
       if (exist) {
-        let index = charactersOrigin.findIndex((character) =>
+        let index = characters.findIndex((character) =>
           character.name.toLowerCase().includes(name.toLowerCase())
         );
         const pageIndex = Math.ceil((index + 1) / cantPerPage); // Calcula la página
