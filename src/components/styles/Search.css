@@ -52,7 +52,9 @@ form input:focus + button {
   border-bottom: 3px solid white;
   color: white;
 }
-
+form .no-tap {
+	cursor: no-drop;
+}
 
 @media (max-width: 640px){
 	form {

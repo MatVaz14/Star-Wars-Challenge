@@ -129,6 +129,7 @@ const Search = () => {
       <button
         disabled={name.length === 0 || isLoading ? true : false}
         type="submit"
+        className={`${isLoading && "no-tap"}`}
       >
         {isLoading ? <span>wait...</span> : <FaSearchPlus />}
       </button>
