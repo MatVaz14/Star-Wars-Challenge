@@ -97,19 +97,21 @@ const Search = () => {
       payload: character?.length === 1 ? character[0] : character,
     });
     const pageIndex = Math.ceil(charactersOrigin.length / cantPerPage); // Calcula la página
-    dispatch({ type: "PAGE", payload: pageIndex });
-    if (pageIndex >= 0 && pageIndex <= 5) {
-      dispatch({ type: "INDEX_BTN", payload: [0, 5] });
-    } else {
-      dispatch({ type: "INDEX_BTN", payload: [pageIndex - 5, pageIndex] });
+    if (charactersOrigin.length) {
+      dispatch({ type: "PAGE", payload: pageIndex });
+      if (pageIndex >= 0 && pageIndex <= 5) {
+        dispatch({ type: "INDEX_BTN", payload: [0, 5] });
+      } else {
+        dispatch({ type: "INDEX_BTN", payload: [pageIndex - 5, pageIndex] });
+      }
+      dispatch({
+        type: "INDEX",
+        payload: [
+          Number((pageIndex - 1) * cantPerPage),
+          Number(pageIndex * cantPerPage),
+        ],
+      });
     }
-    dispatch({
-      type: "INDEX",
-      payload: [
-        Number((pageIndex - 1) * cantPerPage),
-        Number(pageIndex * cantPerPage),
-      ],
-    });
     //==========
     dispatch({ type: "LOADING" });
     setName("");
@@ -128,7 +130,7 @@ const Search = () => {
         disabled={name.length === 0 || isLoading ? true : false}
         type="submit"
       >
-        {isLoading ? <span>. . .</span> : <FaSearchPlus />}
+        {isLoading ? <span>wait...</span> : <FaSearchPlus />}
       </button>
     </form>
   );
