@@ -28,7 +28,7 @@ const Paginate = () => {
   const handleClick = (event) => {
     const selectedPage = Number(event.target.value);
 
-    // si la pagina selexionada 2 y current es 0 por ej
+    // si la pagina seleccionada 2 y current es 0 por ej
     if (selectedPage !== currentPage) {
       dispatch({ type: "PAGE", payload: selectedPage });
       dispatch({
